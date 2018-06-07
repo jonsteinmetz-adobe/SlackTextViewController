@@ -2278,7 +2278,10 @@ CGFloat const SLKAutoCompletionViewDefaultHeight = 140.0;
 {
     self.textInputbarHC.constant = self.textInputbar.minimumInputbarHeight;
     self.scrollViewHC.constant = [self slk_appropriateScrollViewHeight];
-    self.keyboardHC.constant = [self slk_appropriateKeyboardHeightFromRect:CGRectNull];
+    // This line causes the scroll view to layout too tall and the text field
+    // to appear behind the keyboard if this gets called when the keyboard is
+    // already up. Removing this does not appear to have a negative effect.
+//    self.keyboardHC.constant = [self slk_appropriateKeyboardHeightFromRect:CGRectNull];
     
     if (_textInputbar.isEditing) {
         self.textInputbarHC.constant += self.textInputbar.editorContentViewHeight;
